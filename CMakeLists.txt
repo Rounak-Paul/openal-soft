@@ -12,6 +12,7 @@ if(APPLE)
         "CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED")
     set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED NO)
     set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED NO)
+    set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architectures for OS X")
 endif()
 
 if(CMAKE_SYSTEM_NAME STREQUAL "iOS")
@@ -105,18 +106,18 @@ option(ALSOFT_DLOPEN  "Check for the dlopen API for loading optional libs"  ON)
 
 option(ALSOFT_WERROR  "Treat compile warnings as errors"      OFF)
 
-option(ALSOFT_UTILS "Build utility programs"  ON)
+option(ALSOFT_UTILS "Build utility programs"  OFF)
 option(ALSOFT_NO_CONFIG_UTIL "Disable building the alsoft-config utility" OFF)
 
-option(ALSOFT_EXAMPLES  "Build example programs"  ON)
+option(ALSOFT_EXAMPLES  "Build example programs"  OFF)
 option(ALSOFT_TESTS "Build test programs"  OFF)
 
 option(ALSOFT_INSTALL "Install main library" ON)
 option(ALSOFT_INSTALL_CONFIG "Install alsoft.conf sample configuration file" ON)
 option(ALSOFT_INSTALL_HRTF_DATA "Install HRTF data files" ON)
 option(ALSOFT_INSTALL_AMBDEC_PRESETS "Install AmbDec preset files" ON)
-option(ALSOFT_INSTALL_EXAMPLES "Install example programs (alplay, alstream, ...)" ON)
-option(ALSOFT_INSTALL_UTILS "Install utility programs (openal-info, alsoft-config, ...)" ON)
+option(ALSOFT_INSTALL_EXAMPLES "Install example programs (alplay, alstream, ...)" OFF)
+option(ALSOFT_INSTALL_UTILS "Install utility programs (openal-info, alsoft-config, ...)" OFF)
 option(ALSOFT_UPDATE_BUILD_VERSION "Update git build version info" ON)
 
 option(ALSOFT_EAX "Enable legacy EAX extensions" ${WIN32})
@@ -1395,7 +1396,6 @@ configure_file(
     "${OpenAL_SOURCE_DIR}/openal.pc.in"
     "${OpenAL_BINARY_DIR}/openal.pc"
     @ONLY)
-
 
 add_library(alsoft.common STATIC EXCLUDE_FROM_ALL ${COMMON_OBJS})
 target_include_directories(alsoft.common PRIVATE ${OpenAL_SOURCE_DIR}/include
